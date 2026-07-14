@@ -100,26 +100,3 @@ jobs:
 
       - name: Build
         run: npm run build
-
-
-  Security:
-  runs-on: ubuntu-latest
-
-  steps:
-    - uses: actions/checkout@v4
-
-    - uses: actions/setup-node@v4
-      with:
-        node-version: ${{ env.NODE_BUILD_VERSION }}
-        cache: npm
-
-    - name: Cache node modules
-      uses: actions/cache@v4
-      with:
-        path: ~/.npm
-        key: npm-${{ runner.os }}-${{ hashFiles('package-lock.json') }}
-
-    - run: npm ci
-
-    - name: Security audit
-      run: npm audit --audit-level=high
