@@ -4,6 +4,9 @@ on:
   push:
     branches: [ master ]
 
+  pull_request:
+    branches: [ master ]
+
 env:
   NODE_BUILD_VERSION: 22
 
@@ -69,6 +72,8 @@ jobs:
           if-no-files-found: ignore
 
   Build:
+    if: github.ref == 'refs/heads/master'
+    
     runs-on: ubuntu-latest
     needs: Test
 
