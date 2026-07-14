@@ -13,11 +13,14 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+      - uses: actions/checkout@v4
+
       - uses: ./.github/actions/node-setup
         with:
           node-version: ${{ env.NODE_BUILD_VERSION }}
 
       - run: npm run lint
+
 
   Test:
     runs-on: ubuntu-latest
@@ -28,11 +31,14 @@ jobs:
         node-version: [20, 22, 24]
 
     steps:
+      - uses: actions/checkout@v4
+
       - uses: ./.github/actions/node-setup
         with:
           node-version: ${{ matrix.node-version }}
 
       - run: npm test
+
 
   Build:
     if: github.ref == 'refs/heads/master'
@@ -40,12 +46,15 @@ jobs:
     needs: Test
 
     steps:
+      - uses: actions/checkout@v4
+
       - uses: ./.github/actions/node-setup
         with:
           node-version: ${{ env.NODE_BUILD_VERSION }}
 
       - name: Build
         run: npm run build
+
 
   Environment:
     runs-on: ubuntu-latest
