@@ -23,7 +23,7 @@ jobs:
         uses: actions/setup-node@v4
 
       - name: Install dependencies
-        run: npm CI
+        run: npm ci
 
       - name: Finish job
         run: echo "Finish Job"
