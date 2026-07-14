@@ -1,0 +1,13 @@
+name: CI - Node.JS
+
+on:
+  push:
+    branches: [ master ]
+
+jobs:
+  hello_world:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Print hello_world
+        run: echo "Hello World!"
