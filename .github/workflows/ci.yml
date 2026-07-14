@@ -104,8 +104,9 @@ jobs:
 
 
   Environment:
+    environment: production
     runs-on: ubuntu-latest
 
     steps:
       - name: Print var
-        run: echo ${{ env.NODE_KEY }}
+        run: echo ${{ vars.KEY }}
