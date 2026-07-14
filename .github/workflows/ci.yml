@@ -108,4 +108,4 @@ jobs:
 
     steps:
       - name: Print var
-        run: echo ${{ NODE_KEY }}
+        run: echo ${{ env.NODE_KEY }}
