@@ -9,98 +9,46 @@ on:
 
 env:
   NODE_BUILD_VERSION: 22
-  NODE_KEY: ${{ vars.KEY }}
 
 jobs:
   Lint:
-    runs-on: ubuntu-latest
+  runs-on: ubuntu-latest
 
-    steps:
-      - name: Checkout repository
-        uses: actions/checkout@v4
+  steps:
+    - uses: ./.github/actions/setup-node
+      with:
+        node-version: ${{ env.NODE_BUILD_VERSION }}
 
-      - name: Setup node.JS
-        uses: actions/setup-node@v4
-        with:
-          node-version: ${{ env.NODE_BUILD_VERSION }}
-          cache: npm
-
-      - name: Cache node modules
-        uses: actions/cache@v4
-        with:
-          path: ~/.npm
-          key: npm-${{ runner.os }}-${{ hashFiles('package-lock.json') }}
-
-      - name: Install dependencies
-        run: npm ci
-
-      - name: Lint
-        run: npm run lint
+    - run: npm run lint
 
   Test:
-    runs-on: ubuntu-latest
-    needs: Lint
+  runs-on: ubuntu-latest
+  needs: Lint
 
-    strategy:
-      matrix:
-        node-version: [20, 22, 24]
+  strategy:
+    matrix:
+      node-version: [20, 22, 24]
 
-    steps:
-      - name: Checkout repository
-        uses: actions/checkout@v4
+  steps:
+    - uses: ./.github/actions/setup-node
+      with:
+        node-version: ${{ matrix.node-version }}
 
-      - name: Install Node
-        uses: actions/setup-node@v4
-        with:
-          node-version: ${{ matrix.node-version }}
-          cache: npm
+    - run: npm test
 
-      - name: Cache node modules
-        uses: actions/cache@v4
-        with:
-          path: ~/.npm
-          key: npm-${{ runner.os }}-${{ hashFiles('package-lock.json') }}
+Build:
+  if: github.ref == 'refs/heads/master'
 
-      - name: Install dependencies
-        run: npm ci
+  runs-on: ubuntu-latest
+  needs: Test
 
-      - name: Test
-        run: npm run test
+  steps:
+    - uses: ./.github/actions/setup-node
+      with:
+        node-version: ${{ env.NODE_BUILD_VERSION }}
 
-      - name: Upload coverage
-        uses: actions/upload-artifact@v4
-        with:
-          name: coverage-node-${{ matrix.node-version }}
-          path: coverage/
-          if-no-files-found: ignore
-
-  Build:
-    if: github.ref == 'refs/heads/master'
-
-    runs-on: ubuntu-latest
-    needs: Test
-
-    steps:
-      - name: Checkout repository
-        uses: actions/checkout@v4
-
-      - name: Setup node.JS
-        uses: actions/setup-node@v4
-        with:
-          node-version: ${{ env.NODE_BUILD_VERSION }}
-          cache: npm
-
-      - name: Cache node modules
-        uses: actions/cache@v4
-        with:
-          path: ~/.npm
-          key: npm-${{ runner.os }}-${{ hashFiles('package-lock.json') }}
-
-      - name: Install dependencies
-        run: npm ci
-
-      - name: Build
-        run: npm run build
+    - name: Build
+      run: npm run build
 
 
   Environment:
