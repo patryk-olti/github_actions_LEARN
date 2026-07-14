@@ -13,7 +13,7 @@ jobs:
         run: echo "Hello World!"
 
   build-and-test:
-    runs-on: ubunti-latest
+    runs-on: ubuntu-latest
 
     steps:
       - name: Checkout repository
