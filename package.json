@@ -1,0 +1,19 @@
+{
+  "name": "githubactions",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/patryk-olti/github_actions_LEARN.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/patryk-olti/github_actions_LEARN/issues"
+  },
+  "homepage": "https://github.com/patryk-olti/github_actions_LEARN#readme",
+  "description": ""
+}
