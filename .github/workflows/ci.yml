@@ -80,3 +80,11 @@ jobs:
 
       - name: Build
         run: npm run build
+
+      - name: Upload coverage
+        uses: actions/upload-artifact@v4
+        with:
+          name: coverage-node-${{ env.NODE_BUILD_VERSION }}
+          path: coverage/
+
+        
