@@ -8,6 +8,10 @@ on:
 env:
   NODE_BUILD_VERSION: 22
 
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
 jobs:
   Lint:
     runs-on: ubuntu-latest
