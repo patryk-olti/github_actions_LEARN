@@ -12,7 +12,7 @@ jobs:
       - name: Print hello_world
         run: echo "Hello World!"
 
-  build-and-test:
+  Lint:
     runs-on: ubuntu-latest
     strategy:
       matrix:
@@ -30,5 +30,16 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
-      - name: Finish job
-        run: echo "Finish Job"
+      - name: Lint
+        run: npm run lint
+
+  Test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: CHeckout repository
+        uses: actions/checkout@v4
+
+      - name: Test
+        run: npm run test
+
