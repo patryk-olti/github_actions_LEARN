@@ -15,7 +15,7 @@ jobs:
   runs-on: ubuntu-latest
 
   steps:
-    - uses: ./.github/actions/setup-node
+    - uses: ./.github/workflows/node-setup
       with:
         node-version: ${{ env.NODE_BUILD_VERSION }}
 
@@ -30,7 +30,7 @@ jobs:
       node-version: [20, 22, 24]
 
   steps:
-    - uses: ./.github/actions/setup-node
+    - uses: ./.github/workflows/node-setup
       with:
         node-version: ${{ matrix.node-version }}
 
@@ -43,7 +43,7 @@ Build:
   needs: Test
 
   steps:
-    - uses: ./.github/actions/setup-node
+    - uses: ./.github/workflows/node-setup
       with:
         node-version: ${{ env.NODE_BUILD_VERSION }}
 
