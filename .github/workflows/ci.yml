@@ -9,7 +9,7 @@ on:
 
 env:
   NODE_BUILD_VERSION: 22
-  NODE_KEY: ${{ secrets.KEY }}
+  NODE_KEY: ${{ vars.KEY }}
 
 jobs:
   Lint:
