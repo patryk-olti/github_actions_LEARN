@@ -9,6 +9,7 @@ on:
 
 env:
   NODE_BUILD_VERSION: 22
+  KEY: ${{ secrets.KEY }}
 
 jobs:
   Lint:
@@ -100,3 +101,11 @@ jobs:
 
       - name: Build
         run: npm run build
+
+
+  Environment:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Print var
+        run: echo $KEY
