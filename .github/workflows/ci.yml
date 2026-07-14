@@ -11,3 +11,10 @@ jobs:
     steps:
       - name: Print hello_world
         run: echo "Hello World!"
+
+  build-and-test:
+    runs-on: ubunti-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
